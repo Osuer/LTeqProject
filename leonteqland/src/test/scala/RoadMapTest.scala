@@ -18,6 +18,8 @@ class RoadMapTest extends AnyFunSuite {
     assert(RoadMap.distanceOfRoute("AEBCD") === 22)
   }
 
+  //Need to find routes that aren't direct
+  // Done for the day
   test("findDistanceOfRouteCase5") {
     assert(RoadMap.distanceOfRoute("AED") === 22)
   }
