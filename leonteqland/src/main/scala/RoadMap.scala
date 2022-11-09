@@ -19,7 +19,7 @@ object RoadMap {
 
   def printMap(): Unit ={
     println(roadmap)
-}
+  }
 
   def distanceOfRoute(inputString : String) : Int ={
     val charArray = inputString.toCharArray
