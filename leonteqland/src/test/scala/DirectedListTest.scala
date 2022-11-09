@@ -2,28 +2,8 @@ import org.scalatest.funsuite.AnyFunSuite
 
 class DirectedListTest extends AnyFunSuite {
 
-  test("testAddEdge") {
-    val nodes: Array[Char] = Array(
-      'A',
-      'B',
-      'C',
-      'D',
-      'E'
-    )
-    val obj = new DirectedList(nodes)
-
-
-    obj.addEdge('A', 'B' , 5)
-    obj.addEdge('B', 'C' , 4)
-    obj.addEdge('C', 'D' , 8)
-    obj.addEdge('D', 'C' , 8)
-    obj.addEdge('D', 'E' , 6)
-    obj.addEdge('A', 'D' , 5)
-    obj.addEdge('C', 'E' , 2)
-    obj.addEdge('E', 'B' , 3)
-    obj.addEdge('A', 'E' , 7)
-
-    println(obj.graph)
+  test("testAddEdge") {val inputString = "AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7"
+    val directedList: DirectedList = configuration.buildDirectedList(inputString)
   }
 
 }
