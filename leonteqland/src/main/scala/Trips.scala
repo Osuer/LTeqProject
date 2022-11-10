@@ -11,20 +11,17 @@ class Trips() {
     //Convert from Char to corresponding Int in nodeList
     sourceNode = directedList.nodeList.indexOf(sNode)
     endNode = directedList.nodeList.indexOf(eNode)
-
     //Stack to handle traversing through the graph
     val stack = new Stack[Int]()
-
-    //Push start node on to stack
-    stack.push(directedList.nodeList.indexOf(eNode))
+    //Push source node on to stack
+    stack.push(sourceNode)
     //For each edgeNode that SourceNode has call recursive function
     for ( x <- 0 until directedList.directedGraph(sourceNode).size){
       buildPathsLessThan(maxStops, directedList.directedGraph(sourceNode).toList(x)._1, stack, directedList)
     }
-
     validTrips
   }
-
+  //Helper Function for getNumberOfTripsLessThan
   private def buildPathsLessThan(maxStops: Int, Node: Int, stack: Stack[Int], directedList: DirectedList): Unit ={
     //Check if currentNode is the EndNode and total stops made that is tracked on the stack is less than the maximum amount of stops allowed.
     if (Node == endNode && stack.size <= maxStops){
@@ -44,25 +41,23 @@ class Trips() {
     stack.pop()
   }
 
+
   //Calculate the number of trips equal to maxStops provided as parameter
   def getNumberOfTripsEqualTo(equalStops: Int, sNode: Char, eNode: Char, directedList: DirectedList): Int = {
     //Convert from Char to corresponding Int in nodeList
     sourceNode = directedList.nodeList.indexOf(sNode)
     endNode = directedList.nodeList.indexOf(eNode)
-
     //Stack to handle traversing through the graph
     val stack = new Stack[Int]()
-
     //Push start node on to stack
-    stack.push(directedList.nodeList.indexOf(sNode))
+    stack.push(sourceNode)
     //For each edgeNode that SourceNode has call recursive function
     for ( x <- 0 until directedList.directedGraph(sourceNode).size){
       buildPathsEqualTo(equalStops, directedList.directedGraph(sourceNode).toList(x)._1, stack, directedList)
     }
-
     validTrips
   }
-
+  //Helper Function for getNumberOfTripsEqualTo
   private def buildPathsEqualTo(maxStops: Int, Node: Int, stack: Stack[Int], directedList: DirectedList): Unit ={
     //Check if currentNode is the EndNode and total stops made that is tracked on the stack is equal to the maximum amount of stops allowed.
     if (Node == endNode && stack.size == maxStops){
@@ -82,4 +77,49 @@ class Trips() {
     stack.pop()
   }
 
+
+  //Calculate the number of trips with total distance less than to maxDistance provided as parameter
+  def getNumberOfTripsLessThanDistance(maxDistance: Int, sNode: Char, eNode: Char, directedList: DirectedList): Int = {
+    //Convert from Char to corresponding Int in nodeList
+    sourceNode = directedList.nodeList.indexOf(sNode)
+    endNode = directedList.nodeList.indexOf(eNode)
+    //Stack to handle traversing through the graph
+    val stack = new Stack[Int]()
+    //Stack to handle distance travelled through the graph
+    val distanceStack = new Stack[Int]()
+    //Push start node on to stack
+    stack.push(sourceNode)
+    //For each edgeNode that SourceNode has call recursive function
+    for ( x <- 0 until directedList.directedGraph(sourceNode).size){
+      //For Each edgeNode push the distance to that node onto the stack
+      distanceStack.push(directedList.directedGraph(sourceNode).toList(x)._2)
+      buildPathsLessThanDistance(maxDistance, distanceStack, directedList.directedGraph(sourceNode).toList(x)._1, stack, directedList)
+      //For Each edgeNode pop the distance to that node from the stack
+      distanceStack.pop()
+    }
+    validTrips
+  }
+  //Helper Function for getNumberOfTripsEqualTo
+  private def buildPathsLessThanDistance(maxDistance: Int, distanceStack: Stack[Int], Node: Int, stack: Stack[Int], directedList: DirectedList): Unit ={
+    //Check if currentNode is the EndNode and total distance is less than the maximum distance allowed
+    if (Node == endNode && distanceStack.sum < maxDistance){
+      validTrips = validTrips + 1
+    }
+    //Check if maximum distance has been exceeded
+    if (distanceStack.sum >= maxDistance){
+      return
+    }
+    //Push current node onto stack to mark it as "Stopped At"
+    stack.push(Node)
+    //For each edgeNode that CurrentNode has call recursive function
+    for ( x <- 0 until directedList.directedGraph(Node).size){
+      //For Each edgeNode push the distance to that node onto the stack
+      distanceStack.push(directedList.directedGraph(Node).toList(x)._2)
+      buildPathsLessThanDistance(maxDistance, distanceStack, directedList.directedGraph(Node).toList(x)._1, stack, directedList)
+      //For Each edgeNode pop the distance to that node from the stack
+      distanceStack.pop()
+    }
+    //After traversing all routes remove the Node from the stack
+    stack.pop()
+  }
 }
