@@ -6,8 +6,46 @@ class TripsTest extends AnyFunSuite {
 
   val trips: Trips = new Trips()
 
-  //trips.getNumberOfTripsLessThan(3, 'C', 'C', directedList)
 
-  trips.getNumberOfTripsLessThan(6, 'C', 'C', directedList)
+  test("GetNumberOfTripsFromCtoCLessThan3Stops") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsLessThan(3, 'C', 'C', directedList) === 2)
+  }
+
+  test("GetNumberOfTripsFromCtoCLessThan4Stops") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsLessThan(4, 'C', 'C', directedList) === 4)
+  }
+
+  test("GetNumberOfTripsFromAtoCLessThan4Stops") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsLessThan(4, 'A', 'C', directedList) === 6)
+  }
+
+  test("GetNumberOfTripsFromAtoALessThan4Stops") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsLessThan(4, 'A', 'A', directedList) === 0)
+  }
+
+  test("GetNumberOfTripsFromAtoCEqualTo4Stops") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsEqualTo(4, 'A', 'C', directedList) === 3)
+  }
+
+  test("GetNumberOfTripsFromAtoAEqualTo4Stops") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsEqualTo(4, 'A', 'A', directedList) === 0)
+  }
+
+  test("GetNumberOfTripsFromCtoCEqualTo4Stops") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsEqualTo(4, 'C', 'C', directedList) === 2)
+  }
+
+  test("GetNumberOfTripsFromCtoCEqualTo2Stops") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsEqualTo(2, 'C', 'C', directedList) === 1)
+  }
+
 
 }
