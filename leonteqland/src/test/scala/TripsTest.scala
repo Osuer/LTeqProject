@@ -7,42 +7,42 @@ class TripsTest extends AnyFunSuite {
   val trips: Trips = new Trips()
 
 
-  test("GetNumberOfTripsFromCtoCLessThan3Stops") {
+  test("QUESTION 6: GetNumberOfTripsFromCtoCLessThan3Stops") {
     val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsLessThan(3, 'C', 'C', directedList) === 2)
   }
 
-  test("GetNumberOfTripsFromCtoCLessThan4Stops") {
-    val trips: Trips = new Trips()
-    assert(trips.getNumberOfTripsLessThan(4, 'C', 'C', directedList) === 4)
-  }
-
-  test("GetNumberOfTripsFromAtoCLessThan4Stops") {
-    val trips: Trips = new Trips()
-    assert(trips.getNumberOfTripsLessThan(4, 'A', 'C', directedList) === 6)
-  }
-
-  test("GetNumberOfTripsFromAtoALessThan4Stops") {
-    val trips: Trips = new Trips()
-    assert(trips.getNumberOfTripsLessThan(4, 'A', 'A', directedList) === 0)
-  }
-
-  test("GetNumberOfTripsFromAtoCEqualTo4Stops") {
+  test("QUESTION 7: GetNumberOfTripsFromAtoCEqualTo4Stops") {
     val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsEqualTo(4, 'A', 'C', directedList) === 3)
   }
 
-  test("GetNumberOfTripsFromAtoAEqualTo4Stops") {
+  test("GetNumberOfTripsFromCtoCLessThan4StopsCyclicAndParallelNodes") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsLessThan(4, 'C', 'C', directedList) === 4)
+  }
+
+  test("GetNumberOfTripsFromAtoCLessThan4StopsDifferentSourceAndEndNode") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsLessThan(4, 'A', 'C', directedList) === 6)
+  }
+
+  test("GetNumberOfTripsFromAtoALessThan4StopsUnreachableEndNode") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsLessThan(4, 'A', 'A', directedList) === 0)
+  }
+
+  test("GetNumberOfTripsFromAtoAEqualTo4StopsUnreachableNode") {
     val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsEqualTo(4, 'A', 'A', directedList) === 0)
   }
 
-  test("GetNumberOfTripsFromCtoCEqualTo4Stops") {
+  test("GetNumberOfTripsFromCtoCEqualTo4StopsCyclicAndParallelNodes") {
     val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsEqualTo(4, 'C', 'C', directedList) === 2)
   }
 
-  test("GetNumberOfTripsFromCtoCEqualTo2Stops") {
+  test("GetNumberOfTripsFromCtoCEqualTo2StopsEdgeCase") {
     val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsEqualTo(2, 'C', 'C', directedList) === 1)
   }
