@@ -24,6 +24,10 @@ class SpecificRoute {
         }
       }
     //Return total distance of route if no exception is thrown
-    totalDistance
+    if(totalDistance == 0){
+      -1
+    }else{
+      totalDistance
+    }
   }
 }

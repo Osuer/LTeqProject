@@ -26,6 +26,25 @@ class SpecificRouteTest extends AnyFunSuite {
     assert(specificRoute.findDistance("AED", directedList) === -1)
   }
 
+
+
+
+  /* ================================================
+                  QUESTION 1-5: Extra Tests
+  ===================================================
+  */
+  test("GetRouteDistanceABCDE") {
+    assert(specificRoute.findDistance("ABCDE", directedList) === 23)
+  }
+
+  test("GetRouteDistanceABCDEBCEB") {
+    assert(specificRoute.findDistance("ABCDEBCEB", directedList) === 35)
+  }
+
+  test("GetRouteDistanceADCEC") {
+    assert(specificRoute.findDistance("ADCEC", directedList) === -1)
+  }
+
   test("RouteStringPassedAsStatedInSpec") {
     assert(specificRoute.findDistance("A-B-C", directedList) === 9)
   }
@@ -36,5 +55,8 @@ class SpecificRouteTest extends AnyFunSuite {
 
   test("RouteStringPassedAsUnexpectedFormat") {
     assert(specificRoute.findDistance("a0B-C", directedList) === 9)
+  }
+  test("RouteStringPassedAsOneLetter") {
+    assert(specificRoute.findDistance("A", directedList) === -1)
   }
 }
