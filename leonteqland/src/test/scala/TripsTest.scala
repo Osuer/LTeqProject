@@ -6,33 +6,23 @@ class TripsTest extends AnyFunSuite {
 
   val trips: Trips = new Trips()
 
-  test("QUESTION 8: GetNumberOfTripsFromCtoCLessThan3Stops") {
-    val trips: Trips = new Trips()
-    assert(trips.shortestRoute('A', 'C', directedList) === 9)
-  }
-
-  test("QUESTION 9: GetNumberOfTripsFromCtoCLessThan3Stops") {
-    val trips: Trips = new Trips()
-    assert(trips.shortestRoute('B', 'B', directedList) === 9)
-  }
-
-  test("QUESTION 6: ssGetNumberOfTripsFromCtoCLessThan3Stops") {
-    val trips: Trips = new Trips()
-    assert(trips.getNumberOfTripsLessThan(3, 'B', 'B', directedList) === 2)
-  }
-
   test("QUESTION 6: GetNumberOfTripsFromCtoCLessThan3Stops") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsLessThan(3, 'C', 'C', directedList) === 2)
   }
 
   test("QUESTION 7: GetNumberOfTripsFromAtoCEqualTo4Stops") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsEqualTo(4, 'A', 'C', directedList) === 3)
   }
 
+  test("QUESTION 8: GetShortestRouteFromAtoC") {
+    assert(trips.shortestRoute('A', 'C', directedList) === 9)
+  }
+
+  test("QUESTION 9: GetShortestRouteFromBtoB") {
+    assert(trips.shortestRoute('B', 'B', directedList) === 9)
+  }
+
   test("QUESTION 10: GetNumberOfTripsFromCtoCDistanceLessThan30") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsLessThanDistance(30, 'C', 'C', directedList) === 7)
   }
 
@@ -42,9 +32,8 @@ class TripsTest extends AnyFunSuite {
   /* ================================================
                   QUESTION 6: Extra Tests
   ===================================================
-   */
+  */
   test("GetNumberOfTripsFromCtoCLessThan4StopsCyclicAndParallelNodes") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsLessThan(4, 'C', 'C', directedList) === 4)
     /*
       Routes:
@@ -56,7 +45,6 @@ class TripsTest extends AnyFunSuite {
   }
 
   test("GetNumberOfTripsFromAtoCLessThan4StopsDifferentSourceAndEndNode") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsLessThan(4, 'A', 'C', directedList) === 6)
     /*
       Routes:
@@ -70,7 +58,6 @@ class TripsTest extends AnyFunSuite {
   }
 
   test("GetNumberOfTripsFromAtoALessThan4StopsUnreachableEndNode") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsLessThan(4, 'A', 'A', directedList) === 0)
   }
 
@@ -80,9 +67,8 @@ class TripsTest extends AnyFunSuite {
   /* ================================================
                   QUESTION 7: Extra Tests
   ===================================================
-   */
+  */
   test("GetNumberOfTripsFromAtoAEqualTo4StopsUnreachableNode") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsEqualTo(4, 'A', 'A', directedList) === 0)
   }
 
@@ -92,7 +78,6 @@ class TripsTest extends AnyFunSuite {
   2. CDEBC
    */
   test("GetNumberOfTripsFromCtoCEqualTo4StopsCyclicAndParallelNodes") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsEqualTo(4, 'C', 'C', directedList) === 2)
   }
 
@@ -101,8 +86,78 @@ class TripsTest extends AnyFunSuite {
   1. CDC
    */
   test("GetNumberOfTripsFromCtoCEqualTo2StopsEdgeCase") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsEqualTo(2, 'C', 'C', directedList) === 1)
+  }
+
+
+
+
+  /* ================================================
+                    QUESTION 8 & 9: Extra Tests
+  ===================================================
+  */
+  test("GetShortestRouteFromBtoE") {
+    assert(trips.shortestRoute('B', 'E', directedList) === 6)
+  }
+
+  test("GetShortestRouteFromBtoD") {
+    assert(trips.shortestRoute('B', 'D', directedList) === 12)
+  }
+
+  test("GetShortestRouteFromBtoC") {
+    assert(trips.shortestRoute('B', 'C', directedList) === 4)
+  }
+
+  test("GetShortestRouteFromCtoC") {
+    assert(trips.shortestRoute('C', 'C', directedList) === 9)
+  }
+
+  test("GetShortestRouteFromCtoB") {
+    assert(trips.shortestRoute('C', 'B', directedList) === 5)
+  }
+
+  test("GetShortestRouteFromCtoD") {
+    assert(trips.shortestRoute('C', 'D', directedList) === 8)
+  }
+
+  test("GetShortestRouteFromCtoE") {
+    assert(trips.shortestRoute('C', 'E', directedList) === 2)
+  }
+
+  test("GetShortestRouteFromDtoD") {
+    assert(trips.shortestRoute('D', 'D', directedList) === 16)
+  }
+
+  test("GetShortestRouteFromDtoC") {
+    assert(trips.shortestRoute('D', 'C', directedList) === 8)
+  }
+
+  test("GetShortestRouteFromDtoB") {
+    assert(trips.shortestRoute('D', 'B', directedList) === 9)
+  }
+
+  test("GetShortestRouteFromDtoE") {
+    assert(trips.shortestRoute('D', 'E', directedList) === 6)
+  }
+
+  test("GetShortestRouteFromAtoB") {
+    assert(trips.shortestRoute('A', 'B', directedList) === 5)
+  }
+
+  test("GetShortestRouteFromAtoD") {
+    assert(trips.shortestRoute('A', 'D', directedList) === 5)
+  }
+
+  test("GetShortestRouteFromAtoE") {
+    assert(trips.shortestRoute('A', 'E', directedList) === 7)
+  }
+
+  test("GetShortestRouteFromAtoAUnreachable") {
+    assert(trips.shortestRoute('A', 'A', directedList) === 0)
+  }
+
+  test("GetShortestRouteFromEtoAUnreachable") {
+    assert(trips.shortestRoute('E', 'A', directedList) === 0)
   }
 
 
@@ -113,7 +168,6 @@ class TripsTest extends AnyFunSuite {
   ===================================================
   */
   test("GetNumberOfTripsFromAtoCDistanceLessThan31DifferentCyclicNode") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsLessThanDistance(31, 'D', 'D', directedList) === 4)
     /*
      Routes:
@@ -125,7 +179,6 @@ class TripsTest extends AnyFunSuite {
   }
 
   test("GetNumberOfTripsFromAtoCDistanceLessThan20DifferentSourceAndEndNode") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsLessThanDistance(20, 'A', 'C', directedList) === 5)
     /*
       Routes:
@@ -138,14 +191,10 @@ class TripsTest extends AnyFunSuite {
   }
 
   test("GetNumberOfTripsFromCtoCDistanceLessThan9EdgeCase") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsLessThanDistance(9, 'C', 'C', directedList) === 0)
   }
 
   test("GetNumberOfTripsFromCtoCDistanceLessThan20UnreachableNode") {
-    val trips: Trips = new Trips()
     assert(trips.getNumberOfTripsLessThanDistance(20, 'A', 'A', directedList) === 0)
   }
-
-
 }

@@ -8,6 +8,7 @@ class Trips() {
 
   //Calculate the number of trips less that maxStops provided as parameter
   def getNumberOfTripsLessThan(maxStops: Int, sNode: Char, eNode: Char, directedList: DirectedList): Int = {
+    validTrips = 0
     //Convert from Char to corresponding Int in nodeList
     sourceNode = directedList.nodeList.indexOf(sNode)
     endNode = directedList.nodeList.indexOf(eNode)
@@ -22,9 +23,9 @@ class Trips() {
     validTrips
   }
   //Helper Function for getNumberOfTripsLessThan
-  private def buildPathsLessThan(maxStops: Int, Node: Int, stack: Stack[Int], directedList: DirectedList): Unit ={
+  private def buildPathsLessThan(maxStops: Int, node: Int, stack: Stack[Int], directedList: DirectedList): Unit ={
     //Check if currentNode is the EndNode and total stops made that is tracked on the stack is less than the maximum amount of stops allowed.
-    if (Node == endNode && stack.size <= maxStops){
+    if (node == endNode && stack.size <= maxStops){
       validTrips = validTrips + 1
     }
     //Check if maximum amount of stops has been exceeded
@@ -32,10 +33,10 @@ class Trips() {
       return
     }
     //Push current node onto stack to mark it as "Stopped At"
-    stack.push(directedList.nodeList.indexOf(Node))
+    stack.push(directedList.nodeList.indexOf(node))
     //For each edgeNode that CurrentNode has call recursive function
-    for ( x <- 0 until directedList.directedGraph(Node).size){
-      buildPathsLessThan(maxStops, directedList.directedGraph(Node).toList(x)._1, stack, directedList)
+    for ( x <- 0 until directedList.directedGraph(node).size){
+      buildPathsLessThan(maxStops, directedList.directedGraph(node).toList(x)._1, stack, directedList)
     }
     //After traversing all routes remove the Node from the stack
     stack.pop()
@@ -44,6 +45,7 @@ class Trips() {
 
   //Calculate the number of trips equal to maxStops provided as parameter
   def getNumberOfTripsEqualTo(equalStops: Int, sNode: Char, eNode: Char, directedList: DirectedList): Int = {
+    validTrips = 0
     //Convert from Char to corresponding Int in nodeList
     sourceNode = directedList.nodeList.indexOf(sNode)
     endNode = directedList.nodeList.indexOf(eNode)
@@ -58,9 +60,9 @@ class Trips() {
     validTrips
   }
   //Helper Function for getNumberOfTripsEqualTo
-  private def buildPathsEqualTo(maxStops: Int, Node: Int, stack: Stack[Int], directedList: DirectedList): Unit ={
+  private def buildPathsEqualTo(maxStops: Int, node: Int, stack: Stack[Int], directedList: DirectedList): Unit ={
     //Check if currentNode is the EndNode and total stops made that is tracked on the stack is equal to the maximum amount of stops allowed.
-    if (Node == endNode && stack.size == maxStops){
+    if (node == endNode && stack.size == maxStops){
       validTrips = validTrips + 1
     }
     //Check if maximum amount of stops has been exceeded
@@ -68,10 +70,10 @@ class Trips() {
       return
     }
     //Push current node onto stack to mark it as "Stopped At"
-    stack.push(Node)
+    stack.push(node)
     //For each edgeNode that CurrentNode has call recursive function
-    for ( x <- 0 until directedList.directedGraph(Node).size){
-      buildPathsEqualTo(maxStops, directedList.directedGraph(Node).toList(x)._1, stack, directedList)
+    for ( x <- 0 until directedList.directedGraph(node).size){
+      buildPathsEqualTo(maxStops, directedList.directedGraph(node).toList(x)._1, stack, directedList)
     }
     //After traversing all routes remove the Node from the stack
     stack.pop()
@@ -80,6 +82,7 @@ class Trips() {
 
   //Calculate the number of trips with total distance less than to maxDistance provided as parameter
   def getNumberOfTripsLessThanDistance(maxDistance: Int, sNode: Char, eNode: Char, directedList: DirectedList): Int = {
+    validTrips = 0
     //Convert from Char to corresponding Int in nodeList
     sourceNode = directedList.nodeList.indexOf(sNode)
     endNode = directedList.nodeList.indexOf(eNode)
@@ -100,9 +103,9 @@ class Trips() {
     validTrips
   }
   //Helper Function for getNumberOfTripsEqualTo
-  private def buildPathsLessThanDistance(maxDistance: Int, distanceStack: Stack[Int], Node: Int, stack: Stack[Int], directedList: DirectedList): Unit ={
+  private def buildPathsLessThanDistance(maxDistance: Int, distanceStack: Stack[Int], node: Int, stack: Stack[Int], directedList: DirectedList): Unit ={
     //Check if currentNode is the EndNode and total distance is less than the maximum distance allowed
-    if (Node == endNode && distanceStack.sum < maxDistance){
+    if (node == endNode && distanceStack.sum < maxDistance){
       validTrips = validTrips + 1
     }
     //Check if maximum distance has been exceeded
@@ -110,12 +113,12 @@ class Trips() {
       return
     }
     //Push current node onto stack to mark it as "Stopped At"
-    stack.push(Node)
+    stack.push(node)
     //For each edgeNode that CurrentNode has call recursive function
-    for ( x <- 0 until directedList.directedGraph(Node).size){
+    for ( x <- 0 until directedList.directedGraph(node).size){
       //For Each edgeNode push the distance to that node onto the stack
-      distanceStack.push(directedList.directedGraph(Node).toList(x)._2)
-      buildPathsLessThanDistance(maxDistance, distanceStack, directedList.directedGraph(Node).toList(x)._1, stack, directedList)
+      distanceStack.push(directedList.directedGraph(node).toList(x)._2)
+      buildPathsLessThanDistance(maxDistance, distanceStack, directedList.directedGraph(node).toList(x)._1, stack, directedList)
       //For Each edgeNode pop the distance to that node from the stack
       distanceStack.pop()
     }
@@ -123,45 +126,72 @@ class Trips() {
     stack.pop()
   }
 
-  private val stackList: ListBuffer[Stack[Int]] = new ListBuffer[Stack[Int]]()
-
-  def shortestRoute(sNode: Char, eNode: Char, directedList: DirectedList): Int = {
+  //Calculate the shortest route from a sourceNode to an endNode
+  def shortestRoute(sNode: Char, eNode: Char, directedList: DirectedList): Int ={
+    //Convert from Char to corresponding Int in nodeList
     sourceNode = directedList.nodeList.indexOf(sNode)
     endNode = directedList.nodeList.indexOf(eNode)
-    val specificRoute: SpecificRoute = new SpecificRoute()
-    var shortestDistance: Int = Int.MaxValue
+    //Stack to handle traversing through the graph
     val stack = new Stack[Int]()
+    //Distance array to keep shortest distances from source node to end node
+    val distance: Array[Int] = new Array[Int](directedList.directedGraph.size)
+    //Boolean array to keep track of which nodes have already been visited
+    val visited: Array[Boolean] = new Array[Boolean](directedList.directedGraph.size)
+    //Initialize both arrays
+    for (i <- directedList.directedGraph.indices){
+      distance(i) = Int.MaxValue
+      visited(i) = false
+    }
+    //Set the distance to the source node to 0
+    //This is to kick off the initial distance calculation
+    distance(sourceNode) = 0
+    //For each edge node if it hasn't been visited yet go visit it by calling recursive function
+    for (i <- 0 until directedList.directedGraph(sourceNode).size){
+      if (!visited(directedList.directedGraph(sourceNode).toList(i)._1)){
+        buildPathsForShortestRoute(directedList.directedGraph(sourceNode).toList(i)._1, visited, stack, directedList)
+      }
+    }
+    //Push the source node to the stack
     stack.push(sourceNode)
-    for ( x <- 0 until directedList.directedGraph(sourceNode).size){
-      buildPathsShortestRoute(directedList.directedGraph(sourceNode).toList(x)._1, stack, directedList)
-    }
-
-
-    for (x <- stackList.indices){
-      var temp: String = ""
-      for (y <- stackList.apply(x).indices){
-        temp = temp + directedList.nodeList(stackList.apply(x).pop())
-
+    //While loop to check if any nodes are in the stack
+    while (stack.nonEmpty){
+      //Pop node from stack
+      val stackedNode: Int = stack.pop()
+      //If the distance to the node is not max, check all it's edge nodes.
+      //This is why we set the source nodes distance to previously, because we want to start building routes from the source node first.
+      if (distance(stackedNode) != Int.MaxValue){
+        for (x <- 0 until directedList.directedGraph(stackedNode).size){
+          //If there is an edge in the node that got popped from the stack that points to our source node
+          //set the distance to the source node to MaxInt so that we can calculate the distance to it.
+          if(directedList.directedGraph(stackedNode).toList(x)._1 == sourceNode && distance(sourceNode) == 0){
+            distance(sourceNode) = Int.MaxValue
+          }
+          //If the distance from a node is larger than the current distance to that the edge + the distance from the node(s) to the edge.
+          //Set the new distance.
+          if(distance(directedList.directedGraph(stackedNode).toList(x)._1) > distance(stackedNode) + directedList.directedGraph(stackedNode).toList(x)._2){
+            distance(directedList.directedGraph(stackedNode).toList(x)._1) = distance(stackedNode) + directedList.directedGraph(stackedNode).toList(x)._2
+          }
+        }
       }
-      temp = temp + "C"
-      if (shortestDistance > specificRoute.findDistance(temp, directedList)){
-        shortestDistance = specificRoute.findDistance(temp, directedList)
+    }
+    if(distance(endNode) == Int.MaxValue){
+      0
+    }else{
+      distance(endNode)
+    }
+  }
+  //Helper Function for shortestRoute
+  private def buildPathsForShortestRoute(node: Int, visited: Array[Boolean], stack: Stack[Int], directedList: DirectedList): Unit ={
+    //Set node to visited
+    visited(node) = true
+    //For edge node if it has not been visited go visit it
+    for (x <- 0 until directedList.directedGraph(node).size){
+      if(!visited(directedList.directedGraph(node).toList(x)._1)){
+        buildPathsForShortestRoute(directedList.directedGraph(node).toList(x)._1, visited, stack, directedList)
       }
-      temp = ""
     }
-    shortestDistance
+    //Push the node to the stack
+    stack.push(node)
   }
-  // Need to solve for infinite recursion with parallel nodes
-  private def buildPathsShortestRoute(Node: Int, stack: Stack[Int], directedList: DirectedList): Unit ={
-    if (Node == endNode ){
-      validTrips = validTrips + 1
-      stackList.addOne(stack.clone().reverse)
-      return
-    }
-    stack.push(Node)
-    for ( x <- 0 until directedList.directedGraph(Node).size){
-      buildPathsShortestRoute(directedList.directedGraph(Node).toList(x)._1, stack, directedList)
-    }
-    stack.pop()
-  }
+
 }
