@@ -1,4 +1,4 @@
-import scala.collection.mutable.Stack
+import scala.collection.mutable.{ListBuffer, Stack}
 
 class Trips() {
   //Private variables to be used throughout the class
@@ -120,6 +120,48 @@ class Trips() {
       distanceStack.pop()
     }
     //After traversing all routes remove the Node from the stack
+    stack.pop()
+  }
+
+  private val stackList: ListBuffer[Stack[Int]] = new ListBuffer[Stack[Int]]()
+
+  def shortestRoute(sNode: Char, eNode: Char, directedList: DirectedList): Int = {
+    sourceNode = directedList.nodeList.indexOf(sNode)
+    endNode = directedList.nodeList.indexOf(eNode)
+    val specificRoute: SpecificRoute = new SpecificRoute()
+    var shortestDistance: Int = Int.MaxValue
+    val stack = new Stack[Int]()
+    stack.push(sourceNode)
+    for ( x <- 0 until directedList.directedGraph(sourceNode).size){
+      buildPathsShortestRoute(directedList.directedGraph(sourceNode).toList(x)._1, stack, directedList)
+    }
+
+
+    for (x <- stackList.indices){
+      var temp: String = ""
+      for (y <- stackList.apply(x).indices){
+        temp = temp + directedList.nodeList(stackList.apply(x).pop())
+
+      }
+      temp = temp + "C"
+      if (shortestDistance > specificRoute.findDistance(temp, directedList)){
+        shortestDistance = specificRoute.findDistance(temp, directedList)
+      }
+      temp = ""
+    }
+    shortestDistance
+  }
+  // Need to solve for infinite recursion with parallel nodes
+  private def buildPathsShortestRoute(Node: Int, stack: Stack[Int], directedList: DirectedList): Unit ={
+    if (Node == endNode ){
+      validTrips = validTrips + 1
+      stackList.addOne(stack.clone().reverse)
+      return
+    }
+    stack.push(Node)
+    for ( x <- 0 until directedList.directedGraph(Node).size){
+      buildPathsShortestRoute(directedList.directedGraph(Node).toList(x)._1, stack, directedList)
+    }
     stack.pop()
   }
 }

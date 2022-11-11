@@ -6,6 +6,20 @@ class TripsTest extends AnyFunSuite {
 
   val trips: Trips = new Trips()
 
+  test("QUESTION 8: GetNumberOfTripsFromCtoCLessThan3Stops") {
+    val trips: Trips = new Trips()
+    assert(trips.shortestRoute('A', 'C', directedList) === 9)
+  }
+
+  test("QUESTION 9: GetNumberOfTripsFromCtoCLessThan3Stops") {
+    val trips: Trips = new Trips()
+    assert(trips.shortestRoute('B', 'B', directedList) === 9)
+  }
+
+  test("QUESTION 6: ssGetNumberOfTripsFromCtoCLessThan3Stops") {
+    val trips: Trips = new Trips()
+    assert(trips.getNumberOfTripsLessThan(3, 'B', 'B', directedList) === 2)
+  }
 
   test("QUESTION 6: GetNumberOfTripsFromCtoCLessThan3Stops") {
     val trips: Trips = new Trips()
