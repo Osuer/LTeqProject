@@ -1,0 +1,34 @@
+1. What is a Call Option?
+    Gives the investor the right to wait till the end of the year (term) to decide if they want to buy a stock.
+    Note that you can exercise the call at any point in the term.
+    If the stock price were trending positively they would buy the stock and make a profit.
+    If the stock price were tending negatively they would pass on the option to buy the stock.
+    There is however a cost associated to acquiring the right for a call option. This is called the option premium.
+    The option premium needs to be paid at the beginning on the term.
+
+
+2. What are the parameters impacting the price (premium) of an Option.
+    The current price of the stock.
+    The agreed upon strike price.
+    The period of the term.
+    Current volatility of the stock price.
+
+3. Is it better to be “Short Put” or “Short Call”, and why?
+    Neither is necessarily better than the other. It all depends on the market trend, the risk appetite of the investor.
+    a Short Call is a much more aggressive strategy that involves huge risks. And should only be used when there is a high level of certainty that a market will trend downward.
+    a Short Put however is used well when you're certain that the price of a stock will not fall beyond a certain level. This is less risky, but the potential loss is much higher.
+    
+
+4. What is the interest in investing in a Yield enhancement product ?
+    The ability to realise a gain even though the assumption is that the market is trending sideways.
+    The benefits of a Yield enhancement product is that a gain can be realised even if the price of a product changes very little or at all.
+    Another benefit is that is the price of the stock goes down. The price of the product goes down, but less sharply. Mitigating loss.
+    A caveat of a Yield enhancement product though is that in a strongly rising market the product has limited benefit as the potential gain is limited.
+
+5. (Optional) Can you guess what are the components of the Yields Enhancement product presented in the video ?
+    A combination of Bonds and put options.
+
+6. What does interest you in Leonteq and structured products ?
+    The ability the offer a large choice of solutions to meet any investors need.
+    What interests me in Leonteq is the ability to learn about these structured products. How investors use them and the benefits to be gained from using them.
+    As well as writing code and improving on the platform that Leonteq provides to investors.

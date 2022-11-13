@@ -1,13 +1,14 @@
 import scala.collection.mutable.ListBuffer
 
 class SpecificRoute {
-
-  def findDistance(route: String, directedList: DirectedList): Int ={
+  val asciiLowerBound: Int = 65
+  val asciiUpperBound: Int = 90
+  def findDistance(route: String, directedList: DirectedList): String ={
     val charList: ListBuffer[Char] = new ListBuffer[Char]()
     //Convert route string to char array and remove any characters that aren't letters
     for (x <- 0 until route.length){
       //Using ASCII Values to check if the char is a letter.
-      if (route.charAt(x).toUpper.toInt >= 65 && route.charAt(x).toUpper.toInt <= 90) {
+      if (route.charAt(x).toUpper.toInt >= asciiLowerBound && route.charAt(x).toUpper.toInt <= asciiUpperBound) {
         charList.addOne(route.charAt(x).toUpper)
       }
     }
@@ -19,15 +20,15 @@ class SpecificRoute {
         }
     //If no route is found catch the exception and return -1
     }catch {
-        case ex: Exception => {
-          return -1
+        case ex : NoSuchElementException => {
+          return "NO SUCH ROUTE"
         }
       }
     //Return total distance of route if no exception is thrown
     if(totalDistance == 0){
-      -1
+      "NO SUCH ROUTE"
     }else{
-      totalDistance
+      totalDistance.toString
     }
   }
 }

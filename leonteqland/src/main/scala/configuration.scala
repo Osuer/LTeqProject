@@ -1,11 +1,14 @@
 import scala.collection.mutable.ListBuffer
 object configuration {
+  val asciiLowerBound: Int = 65
+  val asciiUpperBound: Int = 90
+  val asciiBaseIntValue: Int = 48
   def buildDirectedList(inputString: String): DirectedList ={
     val charList: ListBuffer[Char] = new ListBuffer[Char]()
     var sortedList: List[Char] = List[Char]()
     //For each character in the string, force it to uppercase and check if it's a letter by checking the ASCII values.
     for (x <- 0 until inputString.length){
-      if (inputString.charAt(x).toUpper.toInt >= 65 && inputString.charAt(x).toUpper.toInt <= 90) {
+      if (inputString.charAt(x).toUpper.toInt >= asciiLowerBound && inputString.charAt(x).toUpper.toInt <= asciiUpperBound) {
         charList.addOne(inputString.charAt(x).toUpper)
       }
     }
@@ -17,7 +20,7 @@ object configuration {
     val edgeArray: Array[String] = inputString.split(",")
     //Add all the edge nodes to the data structure
     for (i <- edgeArray.indices){
-      directedList.addEdge(edgeArray(i).trim().charAt(0), edgeArray(i).trim().charAt(1), edgeArray(i).trim().charAt(2) - 48)
+      directedList.addEdge(edgeArray(i).trim().charAt(0), edgeArray(i).trim().charAt(1), edgeArray(i).trim().charAt(2) - asciiBaseIntValue)
     }
     directedList
   }

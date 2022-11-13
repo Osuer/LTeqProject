@@ -1,45 +1,4 @@
-Hello Chane,
-
- 
-
-Thanks for interview on Friday.
-
- 
-
-Before proceeding to the next round,
-We would like you to complete this home exercise :
-
-First part is Financial
-Second part is scala.
- 
-
-Try to produce your best Scala code.
-
-Dead line is Next Monday 14th November. But if you have time, the earlier the better.
-
- 
-
- 
-
-###################################
-
-1. Financial Exercise :
-Watch this video :
-https://youtu.be/4vZlQWgMry4  (Leonteq presents basics of Structured Products),
-
-And Explain :
-
-What is a Call Option
-What are the parameters impacting the price (premium) of an Option.
-Is it better to be “Short Put” or “Short Call”, and why ?
-What is the interest in investing in a Yield enhancement product ?
-(Optional) Can you guess what are the components of the Yields Enhancement product presented in the video ?
-What does interest you in Leonteq and structured products ?
- 
-
- 
-
-2. Scala Dev Exercise :
+Scala Dev Exercise :
 
 Instruction :
 Please solve this problem in scala,
